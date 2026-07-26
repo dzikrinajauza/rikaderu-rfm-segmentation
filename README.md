@@ -86,3 +86,16 @@ Kombinasi skor R-F-M dipetakan ke dalam 8 segmen pelanggan standar industri untu
 
 ### 4. Business Tiering 
 Kedelapan segmen tersebut disederhanakan menjadi 4 tier strategis (Platinum, Gold, Silver, Bronze) berdasarkan kombinasi skor RFM, untuk memudahkan pengambilan keputusan alokasi budget oleh tim marketing.
+
+## 📊 Hasil Segmentasi & Strategi Bisnis
+
+### Distribusi Populasi & Kontribusi Revenue per Tier
+
+| Tier	| Jumlah Pelanggan |	% Populasi |	Kontribusi Revenue	| Alokasi Budget Promosi |
+|:------|:-----------------|:------------|:---------------------|:-----------------------|
+| 🖤 Platinum	 | 857	| 19.8% |	$5.3 Juta	| 50% |
+| 💛 Gold	 | 1.000	| 23.0% |	$1.9 Juta	| 35% |
+| 🤍 Silver |	1.105	| 25.5%	| $0.8 Juta	| 15% |
+| 🟤 Bronze |	1.377 |	31.7% |	$0.8 Juta |	0% |
+
+Meski hanya mewakili 19.8% dari total populasi pelanggan, tier Platinum menyumbang mayoritas total revenue perusahaan. Sebaliknya, tier Bronze — meski jumlahnya paling besar (31.7%) — memberikan kontribusi revenue paling rendah, mengindikasikan bahwa strategi diskon merata selama ini tidak efisien secara ROI.
