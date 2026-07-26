@@ -38,7 +38,7 @@ Membangun sistem segmentasi berbasis data historis transaksi untuk menjawab pert
 Dataset transaksi e-commerce diperoleh dari Kaggle, dengan atribut wajib:
 
 | Kategori |	Kolom |
-|:---------|-------:|
+|:---------|:-------|
 | Identitas Pelanggan	| CustomerID |
 | Identitas Transaksi	| InvoiceNo |
 | Tanggal Transaksi	| InvoiceDate |
@@ -47,7 +47,42 @@ Dataset transaksi e-commerce diperoleh dari Kaggle, dengan atribut wajib:
 ### 2. Data Preparation & Cleaning
 
 | Tahapan |	Deskripsi |
-|:--------|----------:|
+|:--------|:----------|
 | Feature Creation |	Membuat kolom TotalAmount = Quantity × UnitPrice, karena dataset mentah tidak |memiliki kolom nilai transaksi total. |
 | Handling Missing Values	| Menghapus (drop) baris dengan CustomerID kosong, karena transaksi anonim tidak dapat dianalisis dengan metode RFM. |
 | Handling Returns/Cancellations	| Mengidentifikasi dan memisahkan transaksi retur/batal, yaitu baris dengan InvoiceNo berawalan huruf "C" (contoh: C536379) dan nilai Quantity negatif, agar metrik Monetary pelanggan tetap akurat. |
+
+### 3. Feature Engineering — Metode RFM
+
+Dari data transaksi yang sudah bersih, dilakukan agregasi per CustomerID menjadi 3 metrik inti:
+
+| Metrik | Definisi |
+|:-------|:---------|
+| Recency (R) |	Jumlah hari sejak transaksi terakhir pelanggan |
+| Frequency (F)	| Jumlah total transaksi/invoice unik pelanggan |
+| Monetary (M)	| Total nilai belanja pelanggan sepanjang periode data |
+
+Setiap metrik kemudian diberi skor (1–3) menggunakan pendekatan quantile-based scoring, menghasilkan kombinasi RFM Score (contoh: 333, 113, 223) yang menjadi dasar klasifikasi segmen.
+
+## 🧠 Metodologi
+
+### 1. Normalisasi Data
+Nilai RFM dinormalisasi agar skala antar fitur setara sebelum proses clustering.
+### 2. Clustering — K-Means
+Model K-Means Clustering dilatih menggunakan data RFM yang sudah ternormalisasi untuk mengelompokkan pelanggan berdasarkan pola perilaku belanja yang serupa.
+### 3. Rule-Based Segmentation
+Kombinasi skor R-F-M dipetakan ke dalam 8 segmen pelanggan standar industri untuk interpretasi bisnis yang lebih intuitif:
+
+| Segmen |	Karakteristik |
+|:-------|:---------------|
+| 🏆 Champions	| Baru belanja, sering, dan bernilai tinggi — pelanggan terbaik |
+| 💛 Loyal Champions	| Sering belanja secara konsisten dalam jangka panjang |
+| 🆕 Recent Customers	| Baru saja melakukan transaksi pertama/terkini |
+| 🌱 Promising	| Pelanggan baru dengan potensi berkembang |
+| ⚠️ Customers Needing Attention	| Nilai transaksi menurun dari rata-rata |
+| 😴 At Risk / About to Sleep	 | Dulu aktif, kini mulai jarang bertransaksi |
+| 💤 Hibernating	| Sudah lama tidak bertransaksi |
+| ❌ Lost	| Pelanggan yang kemungkinan besar sudah churn |
+
+### 4. Business Tiering 
+Kedelapan segmen tersebut disederhanakan menjadi 4 tier strategis (Platinum, Gold, Silver, Bronze) berdasarkan kombinasi skor RFM, untuk memudahkan pengambilan keputusan alokasi budget oleh tim marketing.
