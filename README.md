@@ -99,3 +99,34 @@ Kedelapan segmen tersebut disederhanakan menjadi 4 tier strategis (Platinum, Gol
 | 🟤 Bronze |	1.377 |	31.7% |	$0.8 Juta |	0% |
 
 Meski hanya mewakili 19.8% dari total populasi pelanggan, tier Platinum menyumbang mayoritas total revenue perusahaan. Sebaliknya, tier Bronze — meski jumlahnya paling besar (31.7%) — memberikan kontribusi revenue paling rendah, mengindikasikan bahwa strategi diskon merata selama ini tidak efisien secara ROI.
+
+### Strategi Alokasi Budget (Simulasi: Total $150,000)
+
+Dashboard dilengkapi slider simulasi anggaran (rentang $100,000–$500,000) yang secara dinamis mendistribusikan budget berdasarkan proporsi kontribusi tier:
+
+1. Platinum → $75,000 (50%) — Fokus retensi & reward (VIP program, akses eksklusif) untuk mempertahankan pelanggan paling menguntungkan.
+2. Gold → $52,500 (35%) — Fokus upselling & loyalty nurturing agar naik kelas menjadi Platinum.
+3. Silver → $22,500 (15%) — Fokus re-engagement campaign untuk mencegah penurunan lebih lanjut menuju tier Bronze.
+4. Bronze → $0 (0%) — Tidak diberikan diskon; direkomendasikan strategi biaya rendah seperti email reactivation atau dikeluarkan dari kampanye promosi berbayar, karena secara historis tidak memberikan return yang sepadan.
+
+💡 Dengan pendekatan ini, tim marketing dapat mengalihkan anggaran dari kampanye "diskon merata" menjadi investasi berbasis nilai pelanggan, sekaligus mengidentifikasi 884 pelanggan At Risk dan 749 pelanggan Hibernating sebagai target prioritas kampanye reaktivasi.
+
+## 🖥️ Dashboard
+
+Dashboard interaktif dibangun untuk memvisualisasikan hasil analisis dan memungkinkan simulasi strategi budget secara real-time, terdiri dari 3 halaman utama:
+
+### 1. Overview Tiered
+Ringkasan distribusi tier, kontribusi revenue, dan simulator alokasi budget promosi.
+### 2. RFM Segment Details 
+Breakdown distribusi 8 segmentasi pelanggan berdasarkan RFM score.
+### 3. Customer Data Table
+Tabel database pelanggan lengkap (Recency, Frequency, Monetary, RFM Score, Segmentasi, dan Tier) yang dapat dicari dan disortir.
+
+## Cara Menjalankan Dashboard
+
+Proyek ini dibangun sepenuhnya menggunakan R dan dijalankan melalui RStudio.
+
+```# 1. Clone repository
+git clone https://github.com/dzikrinajauza/rikaderu-rfm-segmentation.git
+cd rikaderu-rfm-segmentation```
+
