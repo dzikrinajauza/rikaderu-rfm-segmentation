@@ -135,7 +135,6 @@ cd rikaderu-rfm-segmentation
 Buka file `dataAnalist_segmentasiPelanggan.Rproj` agar working directory otomatis mengikuti struktur proyek.
 
 ### 3. Install package yang dibutuhkan (jalankan sekali di R Console)
-
 ```install.packages(c("shiny", "bslib", "dplyr", "scales", "ggplot2", "DT", "plotly", "bsicons", "tidyverse", "lubridate", "readr", "stringr"))
 ```
 
