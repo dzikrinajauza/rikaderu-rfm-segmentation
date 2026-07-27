@@ -48,11 +48,11 @@ Dataset transaksi e-commerce diperoleh dari Kaggle, dengan atribut wajib:
 
 ### 2. Data Preparation & Cleaning
 
-| Tahapan                        | Deskripsi                                                                                                                                                                                          |
-| :----------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
-| Feature Creation               | Membuat kolom TotalAmount = Quantity × UnitPrice, karena dataset mentah tidak                                                                                                                      | memiliki kolom nilai transaksi total. |
-| Handling Missing Values        | Menghapus (drop) baris dengan CustomerID kosong, karena transaksi anonim tidak dapat dianalisis dengan metode RFM.                                                                                 |
-| Handling Returns/Cancellations | Mengidentifikasi dan memisahkan transaksi retur/batal, yaitu baris dengan InvoiceNo berawalan huruf "C" (contoh: C536379) dan nilai Quantity negatif, agar metrik Monetary pelanggan tetap akurat. |
+| Tahapan                        | Deskripsi                                 |
+| :----------------------------- | :---------------------------------| 
+| Feature Creation               | Membuat kolom `TotalAmount` = `Quantity` × `UnitPrice`, karena dataset mentah tidak memiliki kolom nilai transaksi total. |
+| Handling Missing Values        | Menghapus (drop) baris dengan `CustomerID` kosong, karena transaksi anonim tidak dapat dianalisis dengan metode RFM.|
+| Handling Returns/Cancellations | Mengidentifikasi dan memisahkan transaksi retur/batal, yaitu baris dengan `InvoiceNo` berawalan huruf "C" (contoh: `C536379`) dan nilai `Quantity` negatif, agar metrik Monetary pelanggan tetap akurat. |
 
 ### 3. Feature Engineering — Metode RFM
 
