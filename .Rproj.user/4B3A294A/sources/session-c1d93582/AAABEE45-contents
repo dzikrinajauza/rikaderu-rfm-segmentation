@@ -1,0 +1,48 @@
+library(lubridate)
+library(tidyr)
+library(dplyr)
+library(readxl)
+library(stringr)
+library(tidyverse)
+
+# -------------INPUT-------------
+
+dataPenjualan <- read_excel("../DataSet Pelanggan.xlsx", sheet="Data Pelanggan")
+
+# BERBAGAI JENIS CARA MELIHAT ISI DATA SET
+# head(dataPenjualan) #melihat 6 baris pertama
+# View(dataPenjualan) #melihat keseluruhan, di tab terbaru
+# str(dataPenjualan)  #Melihat struktur dan tipe data
+# summary(dataPenjualan) #Melihat Ringkasan Statistik Data
+
+# -------------MEMBANGUN SISTEM-------------
+
+# ---KAMUS---
+# clean_sk = clean shell kosong
+# clean_cc = clean cancel order
+# new_ar = new atribut revenue
+# date_c = date clean
+
+# 1. Hapus baris yang terdapat shell kosong (Tidak ada nilai)
+clean_sk <- dataPenjualan %>% drop_na()
+
+# 2. Hapus baris jika nilai quantity "-" dan terdapat karakter "C" di depan nilai invoiceNo
+clean_cc <- clean_sk %>% filter(Quantity>0, !str_starts(InvoiceNo, "C"))
+
+# 3. Buat atribut baru, "Revenue" berasal dari quantity * unitprice
+new_ar <- clean_cc %>% mutate(revenue = Quantity * UnitPrice)
+
+head(new_ar)
+
+# 4. Merapihkan tanggal, urutkan terbaru - terlama, buat format internasional
+date_r <- new_ar %>% 
+  # Membuat R bisa membaca tanggal
+  mutate(InvoiceDate= ymd_hms(InvoiceDate)) %>%
+  # Mengurutkan tanggal terbaru - terlama 
+  arrange(desc(InvoiceDate)) %>%
+  # Buat formaat penulian tanggal sesuai standart international
+  mutate(InvoiceDate=as.Date(InvoiceDate))
+
+view(date_r)
+write_csv(date_r, "hasil_dataCleaning.csv")
+

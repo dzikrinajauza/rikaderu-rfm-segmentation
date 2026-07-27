@@ -1,0 +1,27 @@
+{
+    "id": "D683169E",
+    "path": "~/Kakak_Files/analisisData/Proyek/_1_kasus1_Analisis_RFM_&_Segmentasi/dataAnalist_segmentasiPelanggan/metodeRFM_KMeansMachineLearning.R",
+    "project_path": "metodeRFM_KMeansMachineLearning.R",
+    "type": "r_source",
+    "hash": "4172178424",
+    "contents": "",
+    "dirty": false,
+    "created": 1783395218125.0,
+    "source_on_save": false,
+    "relative_order": 1,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "82,19",
+        "scrollLine": "65"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1783435444,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1783435444902,
+    "read_only": false,
+    "read_only_alternatives": []
+}

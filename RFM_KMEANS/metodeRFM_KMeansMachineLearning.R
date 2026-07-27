@@ -1,0 +1,114 @@
+library(tidyverse)
+library(lubridate)
+library(readr)
+library(stringr)
+library(dplyr)
+
+#------------------INPUT-------------------------------
+
+cleaned_dataPenjualan <- read_csv("hasil_dataCleaning.csv")
+
+head(cleaned_dataPenjualan)
+view(cleaned_dataPenjualan)
+
+#-----------------MEMBANGUN SISTEM RFM--------------------
+
+# 1. Tentukan "hari ini" untuk analisis (biasanya 1 hari setelah transaksi paling akhir di dataset)
+#    Titik Acuan ("Hari Ini"): Kita anggap toko tutup buku pada tanggal 10 Desember 2011 (Satu hari setelah transaksi terakhir).
+tanggal_analisis <- max(cleaned_dataPenjualan$InvoiceDate) + days(1)
+
+rfm_base <- cleaned_dataPenjualan %>%
+  group_by(CustomerID) %>%
+  summarise(
+    # Recency: Selisih hari antara tanggal analisis dengan tanggal transaksi terakhir customer
+    Recency = as.numeric(difftime(tanggal_analisis, max(InvoiceDate), units = "days")),
+    # Frequency: Berapa kali customer berbelanja (dihitung dari jumlah Invoice yang unik)
+    frequency = n_distinct(InvoiceNo),
+    # Monetary: Total uang yang dihabiskan customer (total dari kolom revenue)
+    Monetary = sum(revenue)
+  )
+
+view(rfm_base)
+
+# 2. Mengubah Nilai Menjadi Skor (1, 2, atau 3)
+rfm_score <- rfm_base %>%
+  mutate(
+    # Untuk Recency: Semakin kecil harinya (baru belanja), skornya makin BESAR (3). 
+    # Makanya kita pakai desc()
+    R_score = ntile(desc(Recency), 3),
+    # Untuk F dan M: Semakin besar nilainya, skornya makin BESAR (3).
+    F_score = ntile(frequency, 3),
+    M_score = ntile(Monetary, 3)
+  ) %>%
+  # Menggabungkan ketiga skor menjadi teks, misal R=3, F=3, M=3 menjadi "333"
+  mutate(rfm_score = paste0(R_score, F_score, M_score))
+
+# 3. Membuat Segmentasi 
+rfm_final <- rfm_score %>%
+  mutate(Segmentasi = case_when(
+    rfm_score == "333" ~ "Champions", 
+    rfm_score == "332" ~ "Loyal Champions", 
+    rfm_score %in% c("331", "323", "322", "321", "313", "312", "311") ~ "Recent Customers", 
+    rfm_score %in% c("233", "133") ~ "Promising",
+    rfm_score %in% c("232", "231", "223") ~ "Customers Needing Attention",
+    rfm_score %in% c("222", "221", "213", "212", "211") ~ "At Risk / About to Sleep",
+    rfm_score %in% c("132", "131", "123", "122", "121", "113", "112") ~ "Hibernating",
+    rfm_score == "111" ~ "Lost",
+    TRUE ~ "Other" # Jaga-jaga jika ada kombinasi skor yang terlewat
+  ))
+
+# -------------------MEMBANGUN SISTEM UNTUK VISUALISASI-------------------------------
+
+# 1. Menghitung jumlah pelanggan di masing-masing Segmentation
+segmentasi_sum <- rfm_final %>%
+  count(Segmentasi, name = "Jumlah_Pelanggan")
+
+# Melihat Jumlah masing masing segmentasi 
+print(segmentasi_sum)
+
+# 2. Membuat visualisasi grafik batang horizontal 
+ggplot(segmentasi_sum, aes(x = Jumlah_Pelanggan, y = reorder(Segmentasi, Jumlah_Pelanggan))) + 
+  # geom_col digunakan untuk membuat grafik batang. 
+  # fill = "cornflowerblue" memberikan warna biru yang mirip dengan gambar Anda.
+  geom_col(fill = "cornflowerblue") +
+  
+  # Menambahkan label judul dan sumbu
+  labs(
+    title = "Distribusi Segmentasi Pelanggan",
+    x = "Jumlah Pelanggan",
+    y = "" # Dikosongkan karena nama segmen sudah cukup jelas
+  ) +
+  
+  # Menggunakan tema minimal agar backgroundnya putih bersih seperti Excel
+  theme_minimal() +
+  
+  # Menambahkan teks angka di ujung batang grafik (opsional agar lebih informatif)
+  geom_text(aes(label = Jumlah_Pelanggan), hjust = -0.2, size = 3.5)
+  
+  
+# 4. Mapping Segmen RFM ke Sistem Tier Utama
+rfm_tiered <- rfm_final %>%
+  mutate(Tier = case_when(
+    Segmentasi %in% c("Champions", "Loyal Champions") ~ "Platinum",
+    Segmentasi %in% c("Recent Customers", "Promising") ~ "Gold",
+    Segmentasi %in% c("Customers Needing Attention", "At Risk / About to Sleep") ~ "Silver",
+    Segmentasi %in% c("Hibernating", "Lost") ~ "Bronze",
+    TRUE ~ "Other"
+  )) %>%
+  # Mengubah menjadi factor agar urutan di grafik sesuai hierarki, bukan alfabetis
+  mutate(Tier = factor(Tier, levels = c("Platinum", "Gold", "Silver", "Bronze")))
+
+# 5. Menyiapkan Data Agregat untuk Visualisasi Dashboard
+# Menghitung % Jumlah Pelanggan dan Total Revenue per Tier
+dashboard_data <- rfm_tiered %>%
+  group_by(Tier) %>%
+  summarise(
+    Jumlah_Pelanggan = n(),
+    Total_Revenue = sum(Monetary, na.rm = TRUE)
+  ) %>%
+  mutate(
+    Persentase_Pelanggan = round((Jumlah_Pelanggan / sum(Jumlah_Pelanggan)) * 100, 1)
+  )
+
+# Melihat hasil agregat untuk dashboard
+print(dashboard_data)
