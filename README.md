@@ -3,6 +3,10 @@
 ### Analisis Segmentasi Pelanggan menggunakan RFM Analysis & K-Means Clustering untuk Optimasi Alokasi Anggaran Marketing
 
 ![alt text](https://github.com/dzikrinajauza/rikaderu-rfm-segmentation/blob/main/assets/1.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/rikaderu-rfm-segmentation/blob/main/assets/2.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/rikaderu-rfm-segmentation/blob/main/assets/3.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/rikaderu-rfm-segmentation/blob/main/assets/4.png?raw=true)
+![alt text](https://github.com/dzikrinajauza/rikaderu-rfm-segmentation/blob/main/assets/5.png?raw=true)
 
 ## 📌 Ringkasan Proyek
 
