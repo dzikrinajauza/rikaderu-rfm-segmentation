@@ -172,4 +172,4 @@ Dashboard akan terbuka secara lokal (contoh: http://127.0.0.1:6709, port dapat b
 
 Proyek ini merupakan bagian dari latihan mandiri portofolio Data Analyst dengan studi kasus digital business (e-commerce), dibuat untuk mendemonstrasikan kemampuan end-to-end analytics: dari data cleaning, feature engineering, machine learning (clustering), hingga penerjemahan hasil analisis menjadi rekomendasi strategi bisnis yang berdampak nyata.
 
-> > > > > > > 94f1ae57ee6b40fcfd0fa40bf5e3be13a1f8e802
+
