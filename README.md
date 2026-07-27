@@ -135,8 +135,7 @@ cd rikaderu-rfm-segmentation
 Buka file `dataAnalist_segmentasiPelanggan.Rproj` agar working directory otomatis mengikuti struktur proyek.
 
 ### 3. Install package yang dibutuhkan (jalankan sekali di R Console)
-```install.packages(c("shiny", "bslib", "dplyr", "scales", "ggplot2", "DT", "plotly", "bsicons", "tidyverse", "lubridate", "readr", "stringr"))
-```
+```install.packages(c("shiny", "bslib", "dplyr", "scales", "ggplot2", "DT", "plotly", "bsicons", "tidyverse", "lubridate", "readr", "stringr"))```
 
 ### 4. Jalankan pipeline data (opsional — hasil cleaning sudah tersedia di `hasil_dataCleaning.csv`)
 ```source("dataCleaning.R")                     # Cleaning & feature engineering RFM
@@ -144,8 +143,7 @@ source("metodeRFM_KMeansMachineLearning.R")  # Clustering K-Means & scoring RFM
 ```
 
 ### 5. Jalankan dashboard Shiny
-```shiny::runApp("dashboard_segmentasiPelanggan/app.R")
-```
+```shiny::runApp("dashboard_segmentasiPelanggan/app.R")```
 Atau cukup buka file dashboard_segmentasiPelanggan/app.R di RStudio lalu klik tombol Run App.
 Dashboard akan terbuka secara lokal (contoh: http://127.0.0.1:6709, port dapat berbeda sesuai konfigurasi Shiny di perangkat masing-masing).
 
