@@ -126,7 +126,29 @@ Tabel database pelanggan lengkap (Recency, Frequency, Monetary, RFM Score, Segme
 
 Proyek ini dibangun sepenuhnya menggunakan R dan dijalankan melalui RStudio.
 
-```# 1. Clone repository
-git clone https://github.com/dzikrinajauza/rikaderu-rfm-segmentation.git
-cd rikaderu-rfm-segmentation```
+### 1. Clone repository
+```git clone https://github.com/dzikrinajauza/rikaderu-rfm-segmentation.git
+cd rikaderu-rfm-segmentation
+```
 
+### 2. Buka project di RStudio 
+Buka file `dataAnalist_segmentasiPelanggan.Rproj` agar working directory otomatis mengikuti struktur proyek.
+
+### 3. Install package yang dibutuhkan (jalankan sekali di R Console)
+
+```install.packages(c("shiny", "bslib", "dplyr", "scales", "ggplot2", "DT", "plotly", "bsicons", "tidyverse", "lubridate", "readr", "stringr"))
+```
+
+### 4. Jalankan pipeline data (opsional — hasil cleaning sudah tersedia di `hasil_dataCleaning.csv`)
+```source("dataCleaning.R")                     # Cleaning & feature engineering RFM
+source("metodeRFM_KMeansMachineLearning.R")  # Clustering K-Means & scoring RFM
+```
+
+### 5. Jalankan dashboard Shiny
+```shiny::runApp("dashboard_segmentasiPelanggan/app.R")
+```
+Atau cukup buka file dashboard_segmentasiPelanggan/app.R di RStudio lalu klik tombol Run App.
+Dashboard akan terbuka secara lokal (contoh: http://127.0.0.1:6709, port dapat berbeda sesuai konfigurasi Shiny di perangkat masing-masing).
+
+## 👤 Author
+[Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauzal@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ · 
