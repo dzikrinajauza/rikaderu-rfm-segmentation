@@ -168,7 +168,7 @@ Dashboard akan terbuka secara lokal (contoh: http://127.0.0.1:6709, port dapat b
 
 ## 👤 Author
 
-[Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauzal@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
+[Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauza@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
 
 Proyek ini merupakan bagian dari latihan mandiri portofolio Data Analyst dengan studi kasus digital business (e-commerce), dibuat untuk mendemonstrasikan kemampuan end-to-end analytics: dari data cleaning, feature engineering, machine learning (clustering), hingga penerjemahan hasil analisis menjadi rekomendasi strategi bisnis yang berdampak nyata.
 
