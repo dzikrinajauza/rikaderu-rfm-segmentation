@@ -166,6 +166,10 @@ source("metodeRFM_KMeansMachineLearning.R")  # Clustering K-Means & scoring RFM
 Atau cukup buka file dashboard_segmentasiPelanggan/app.R di RStudio lalu klik tombol Run App.
 Dashboard akan terbuka secara lokal (contoh: http://127.0.0.1:6709, port dapat berbeda sesuai konfigurasi Shiny di perangkat masing-masing).
 
+## 📄 Lisensi
+
+Proyek ini dirilis di bawah lisensi MIT — bebas digunakan untuk keperluan riset dan pembelajaran dengan mencantumkan atribusi.
+
 ## 👤 Author
 
 [Dzikrina Jauza Hasna] Data Analyst | E-Commerce & Customer Analytics 📧 [dzikrinajauza@example.com] · 🔗 https://www.linkedin.com/in/dzikrinajauza/ ·
